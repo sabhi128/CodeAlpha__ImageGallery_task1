@@ -1,0 +1,603 @@
+/* Luxury Editorial Museum Design System */
+:root {
+    --bg-dark: #0a0a0b;
+    --bg-card: transparent;
+    --border-color: rgba(255, 255, 255, 0.06);
+    --border-color-hover: rgba(255, 255, 255, 0.15);
+    
+    --accent-gold: #c5a880; /* Warm champagne gold */
+    
+    --text-primary: #f5f5f7; /* Apple soft white */
+    --text-secondary: #86868b; /* Muted slate gray */
+    --text-muted: #515156; /* Editorial captions */
+    
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
+    
+    --transition-smooth: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-fast: all 0.25s ease;
+}
+
+/* Base resets and defaults */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    scrollbar-gutter: stable;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    letter-spacing: -0.01em;
+}
+
+/* Fine-art vignette lighting */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at center, transparent 30%, rgba(0, 0, 0, 0.4) 100%);
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* Header styling */
+.app-header {
+    padding: 6rem 2rem 4rem;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.header-container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.exhibition-no {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.35em;
+    color: var(--accent-gold);
+    margin-bottom: 1.5rem;
+}
+
+.brand-title {
+    font-family: var(--font-serif);
+    font-size: 4rem;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    color: var(--text-primary);
+    margin-bottom: 1.25rem;
+}
+
+.tagline {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    font-style: italic;
+    color: var(--text-secondary);
+    font-weight: 400;
+    margin-bottom: 3.5rem;
+    opacity: 0.85;
+}
+
+/* Minimalist Text Navigation */
+.filter-controls {
+    display: flex;
+    gap: 3.5rem;
+    justify-content: center;
+}
+
+.filter-btn {
+    font-family: var(--font-sans);
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 0.6rem 0;
+    position: relative;
+    transition: var(--transition-fast);
+}
+
+.filter-btn:hover {
+    color: var(--text-primary);
+}
+
+.filter-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 1px;
+    background-color: var(--accent-gold);
+    transition: var(--transition-fast);
+    transform: translateX(-50%);
+}
+
+.filter-btn.active {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.filter-btn.active::after {
+    width: 100%;
+}
+
+/* Main Content Area */
+.main-content {
+    flex: 1;
+    max-width: 1300px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 5rem 2rem 6rem;
+}
+
+/* Responsive Masonry/Grid */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 4rem 2.5rem;
+}
+
+/* Gallery Card (Typographical & Editorial Style) */
+.gallery-card {
+    background: var(--bg-card);
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-card.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.gallery-card.hide {
+    display: none;
+}
+
+.card-inner {
+    display: flex;
+    flex-direction: column;
+}
+
+.image-wrapper {
+    position: relative;
+    aspect-ratio: 3/2;
+    overflow: hidden;
+    background-color: #121214;
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition-smooth);
+    filter: grayscale(15%) contrast(102%);
+    opacity: 0; /* start hidden */
+}
+
+.image-wrapper img.img-loaded {
+    opacity: 1; /* fade in once loaded */
+}
+
+/* Editorial Minimal Overlay */
+.card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 10, 11, 0.15);
+    transition: var(--transition-fast);
+}
+
+/* View icon / Search icon removed for clean editorial look */
+.view-icon {
+    display: none;
+}
+
+/* Typography Details flush left under image */
+.card-details {
+    padding: 1.25rem 0 0;
+    text-align: left;
+}
+
+.category-tag {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    transition: var(--transition-fast);
+}
+
+.card-title {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--text-primary);
+    letter-spacing: 0.01em;
+    line-height: 1.3;
+    transition: var(--transition-fast);
+}
+
+.card-meta {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    margin-top: 0.4rem;
+    letter-spacing: 0.02em;
+    transition: var(--transition-fast);
+}
+
+/* Card Hover States */
+.gallery-card:hover .image-wrapper img {
+    transform: scale(1.05);
+    filter: grayscale(0%) contrast(100%);
+}
+
+.gallery-card:hover .card-overlay {
+    background-color: rgba(10, 10, 11, 0);
+}
+
+.gallery-card:hover .card-title {
+    color: var(--accent-gold);
+}
+
+.gallery-card:hover .category-tag {
+    color: var(--accent-gold);
+}
+
+.gallery-card:hover .card-meta {
+    color: var(--text-secondary);
+}
+
+/* Lightbox Modal (Fine Art Theater Style) */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.5s;
+    outline: none;
+}
+
+.lightbox.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.lightbox-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(7, 7, 8, 0.98);
+}
+
+/* Quiet slide-show arrows & controls */
+.lightbox-close,
+.lightbox-nav {
+    position: absolute;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+    z-index: 1010;
+}
+
+.lightbox-close svg,
+.lightbox-nav svg {
+    width: 2rem;
+    height: 2rem;
+    stroke-width: 1.25;
+}
+
+.lightbox-close:hover {
+    color: var(--text-primary);
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.35));
+}
+
+.lightbox-nav:hover {
+    color: var(--text-primary);
+    transform: translateY(-50%) scale(1.05);
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.35));
+}
+
+.lightbox-close {
+    top: 3rem;
+    right: 3rem;
+}
+
+.lightbox-nav {
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4rem;
+    height: 4rem;
+}
+
+.lightbox-prev {
+    left: 3rem;
+}
+
+.lightbox-next {
+    right: 3rem;
+}
+
+/* Lightbox Content Layout */
+.lightbox-content {
+    position: relative;
+    max-width: 1000px;
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1005;
+    opacity: 0;
+    transform: scale(0.98);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s;
+}
+
+.lightbox.active .lightbox-content {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.lightbox-image-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    overflow: hidden;
+}
+
+.lightbox-image-container img {
+    max-width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+    display: block;
+    border-radius: 0;
+    transition: opacity 0.35s ease;
+}
+
+/* Lightbox details underneath image */
+.lightbox-caption {
+    margin-top: 2rem;
+    text-align: center;
+    width: 100%;
+}
+
+.lightbox-meta-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.lightbox-counter {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--text-secondary);
+}
+
+.meta-divider {
+    font-size: 0.6rem;
+    color: var(--text-muted);
+}
+
+.lightbox-caption .category-tag {
+    display: inline-block;
+    color: var(--accent-gold);
+    letter-spacing: 0.25em;
+    margin-bottom: 0; /* Reset margin in row layout */
+}
+
+.lightbox-title {
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    font-weight: 300;
+    color: var(--text-primary);
+    letter-spacing: 0.05em;
+}
+
+.lightbox-meta {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 0.6rem;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+}
+
+/* Footer styling */
+.app-footer {
+    padding: 5rem 2rem;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    background: transparent;
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 3.5rem 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .app-header {
+        padding: 4rem 1.5rem 3rem;
+    }
+    
+    .brand-title {
+        font-size: 3rem;
+        letter-spacing: 0.2em;
+    }
+    
+    .tagline {
+        font-size: 1.15rem;
+        margin-bottom: 2.5rem;
+    }
+    
+    /* Horizontal scrolling filters on mobile */
+    .filter-controls {
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        max-width: 100%;
+        gap: 2rem;
+        padding: 0 1rem 0.5rem;
+        justify-content: flex-start;
+        -webkit-overflow-scrolling: touch;
+        border: none;
+    }
+    
+    .filter-controls::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .filter-btn {
+        font-size: 0.8rem;
+        padding: 0.5rem 0;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    
+    /* Lightbox controls adjustment for touch screens */
+    .lightbox-close {
+        top: 2rem;
+        right: 2rem;
+    }
+    
+    .lightbox-nav {
+        width: 3rem;
+        height: 3rem;
+    }
+    
+    .lightbox-prev {
+        left: 1.5rem;
+    }
+    
+    .lightbox-next {
+        right: 1.5rem;
+    }
+    
+    .lightbox-image-container img {
+        max-height: 60vh;
+    }
+    
+    .lightbox-title {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .brand-title {
+        font-size: 2.5rem;
+        letter-spacing: 0.15em;
+    }
+    
+    .tagline {
+        font-size: 1rem;
+    }
+    
+    .card-title {
+        font-size: 1.25rem;
+    }
+}
+
+/* Lightbox Navigation Slide Animations */
+@keyframes slideLeftOut {
+    to {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+}
+
+@keyframes slideLeftIn {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideRightOut {
+    to {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+}
+
+@keyframes slideRightIn {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

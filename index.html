@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="A premium, fully responsive interactive image gallery with category filtering and an advanced lightbox view. Designed for CodeAlpha Internship Task 1.">
+    <title>Aether — Curation of Nature, Architecture, and Space</title>
+    <!-- Google Fonts: Cormorant Garamond (Editorial Serif) and Inter (Sans-serif) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="app-header">
+        <div class="header-container">
+            <span class="exhibition-no">Exhibition No. 01</span>
+            <h1 class="brand-title">A E T H E R</h1>
+            <p class="tagline">A curated collection of nature, architecture, and space</p>
+
+            <!-- Filter Controls -->
+            <nav class="filter-controls" aria-label="Image category filter">
+                <button class="filter-btn active" data-filter="all">all</button>
+                <button class="filter-btn" data-filter="nature">nature</button>
+                <button class="filter-btn" data-filter="architecture">architecture</button>
+                <button class="filter-btn" data-filter="space">space</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Gallery Grid -->
+        <section class="gallery-grid" id="gallery-grid" aria-live="polite">
+
+            <!-- Nature 1 -->
+            <article class="gallery-card" data-category="nature">
+                <div class="card-inner">
+                    <div class="image-wrapper">
+                        <img src="images/nature_forest.png"
+                            alt="Mystical lush green forest with warm sunbeams piercing the canopy" loading="lazy">
+                        <div class="card-overlay"></div>
+                    </div>
+                    <div class="card-details">
+                        <span class="category-tag">Nature</span>
+                        <h3 class="card-title">Enchanted Woodlands</h3>
+                        <p class="card-meta">2026 &bull; Digital Photography &bull; 35mm Lens</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Nature 2 -->
+            <article class="gallery-card" data-category="nature">
+                <div class="card-inner">
+                    <div class="image-wrapper">
+                        <img src="images/nature_mountains.png"
+                            alt="Majestic snow-capped mountain peak under a starry dark sky" loading="lazy">
+                        <div class="card-overlay"></div>
+                    </div>
+                    <div class="card-details">
+                        <span class="category-tag">Nature</span>
+                        <h3 class="card-title">Starlit Peak</h3>
+                        <p class="card-meta">2026 &bull; Astrophotography &bull; Medium Format</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Nature 3 -->
+            <article class="gallery-card" data-category="nature">
+                <div class="card-inner">
+                    <div class="image-wrapper">
+                        <img src="images/nature_waterfall.png"
+                            alt="Majestic tropical waterfall cascading into a turquoise pool" loading="lazy">
+                        <div class="card-overlay"></div>
+                    </div>
+                    <div class="card-details">
+                        <span class="category-tag">Nature</span>
+                        <h3 class="card-title">Cascading Paradise</h3>
+                        <p class="card-meta">2025 &bull; Landscape Capture &bull; Long Exposure</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Architecture 1 -->
+            <article class="gallery-card" data-category="architecture">
+                <div class="card-inner">
+                    <div class="image-wrapper">
+                        <img src="images/architecture_skyline.png"
+                            alt="Futuristic cyberpunk city skyline at dusk with neon towers" loading="lazy">
+                        <div class="card-overlay"></div>
+                    </div>
+                    <div class="card-details">
+                        <span class="category-tag">Architecture</span>
+                        <h3 class="card-title">Neo-Neon Metropolis</h3>
+                        <p class="card-meta">2026 &bull; Urban Render &bull; Ray-Traced CGI</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Architecture 2 -->
+            <article class="gallery-card" data-category="architecture">
+                <div class="card-inner">
+                    <div class="image-wrapper">
+                        <img src="images/architecture_cathedral.png"
+                            alt="Intricate gothic cathedral facade lit with golden lights" loading="lazy">
+                        <div class="card-overlay"></div>
+                    </div>
+                    <div class="card-details">
+                        <span class="category-tag">Architecture</span>
+                        <h3 class="card-title">Golden Gothic facade</h3>
+                        <p class="card-meta">2025 &bull; Architectural Study &bull; Golden Hour</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Architecture 3 -->
+            <article class="gallery-card" data-category="architecture">
+                <div class="card-inner">
+                    <div class="image-wrapper">
+                        <img src="images/architecture_bridge.png"
+                            alt="Sleek suspension bridge glowing at night over river" loading="lazy">
+                        <div class="card-overlay"></div>
+                    </div>
+                    <div class="card-details">
+                        <span class="category-tag">Architecture</span>
+                        <h3 class="card-title">Midnight Span</h3>
+                        <p class="card-meta">2026 &bull; Long Exposure &bull; Nightscape Capture</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Space 1 -->
+            <article class="gallery-card" data-category="space">
+                <div class="card-inner">
+                    <div class="image-wrapper">
+                        <img src="images/space_nebula.png"
+                            alt="Vibrant cosmic nebula with pink, blue, and purple dust clouds" loading="lazy">
+                        <div class="card-overlay"></div>
+                    </div>
+                    <div class="card-details">
+                        <span class="category-tag">Space</span>
+                        <h3 class="card-title">Supernova Nebula</h3>
+                        <p class="card-meta">2026 &bull; Deep Field Capture &bull; Hubble Spectrum</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Space 2 -->
+            <article class="gallery-card" data-category="space">
+                <div class="card-inner">
+                    <div class="image-wrapper">
+                        <img src="images/space_cybercity.png"
+                            alt="Sleek sci-fi space station in orbit near a giant ringed planet" loading="lazy">
+                        <div class="card-overlay"></div>
+                    </div>
+                    <div class="card-details">
+                        <span class="category-tag">Space</span>
+                        <h3 class="card-title">Gas Giant Outpost</h3>
+                        <p class="card-meta">2026 &bull; Concept Illustration &bull; Sci-Fi Series</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Space 3 -->
+            <article class="gallery-card" data-category="space">
+                <div class="card-inner">
+                    <div class="image-wrapper">
+                        <img src="images/space_astronaut.png"
+                            alt="Astronaut floating in deep space with crescent Earth background" loading="lazy">
+                        <div class="card-overlay"></div>
+                    </div>
+                    <div class="card-details">
+                        <span class="category-tag">Space</span>
+                        <h3 class="card-title">Ethereal Orbit</h3>
+                        <p class="card-meta">2025 &bull; CGI Illustration &bull; Earthrise Study</p>
+                    </div>
+                </div>
+            </article>
+
+        </section>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-hidden="true" tabindex="-1">
+        <div class="lightbox-overlay"></div>
+
+        <!-- Lightbox Close Button -->
+        <button class="lightbox-close" aria-label="Close lightbox">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+        </button>
+
+        <!-- Lightbox Navigation -->
+        <button class="lightbox-nav lightbox-prev" aria-label="Previous image">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6" />
+            </svg>
+        </button>
+
+        <button class="lightbox-nav lightbox-next" aria-label="Next image">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6" />
+            </svg>
+        </button>
+
+        <!-- Lightbox Content Container -->
+        <div class="lightbox-content">
+            <div class="lightbox-image-container">
+                <img id="lightbox-img" src="" alt="">
+            </div>
+            <div class="lightbox-caption">
+                <div class="lightbox-meta-row">
+                    <span id="lightbox-counter" class="lightbox-counter">1 of 9</span>
+                    <span class="meta-divider">&bull;</span>
+                    <span id="lightbox-category" class="category-tag">Category</span>
+                </div>
+                <h2 id="lightbox-title" class="lightbox-title">Image Title</h2>
+                <p id="lightbox-meta" class="lightbox-meta">Metadata specifications</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="app-footer">
+        <p>&copy; 2026 Aether Gallery.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
