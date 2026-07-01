@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Obsidian Charcoal Background -->
+  <rect width="32" height="32" rx="7" fill="#0a0a0b"/>
+  <!-- Celestial Outer Ring -->
+  <circle cx="16" cy="16" r="11" stroke="#c5a880" stroke-width="1" stroke-opacity="0.8"/>
+  <!-- Architectural Diamond -->
+  <path d="M16 8 L22 16 L16 24 L10 16 Z" stroke="#c5a880" stroke-width="1" stroke-linejoin="round"/>
+  <!-- Core Sun/Aether Dot -->
+  <circle cx="16" cy="16" r="2.5" fill="#c5a880"/>
+</svg>
